@@ -2,13 +2,14 @@ import { defineStore } from 'pinia'
 
 import axios from 'axios'
 
-const server = 'http://localhost:3002/'
+const server = 'https://iproject-production-8684.up.railway.app/'
 
 export const useAppStore = defineStore('app', {
     state: () => ({
         compactDisc: [],
         tShirt: [],
-        loginUser: []
+        loginUser: [],
+        dataSpotify: []
     }),
     actions: {
         async fetchCompactDisc() {
@@ -21,6 +22,12 @@ export const useAppStore = defineStore('app', {
                 console.log(data, 'ppppp');
                 this.compactDisc = data
             } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
                 console.log(error);
             }
         },
@@ -33,6 +40,12 @@ export const useAppStore = defineStore('app', {
                 console.log(data);
                 this.tShirt = data
             } catch (error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
                 console.log(error);
             }
         },
@@ -47,7 +60,12 @@ export const useAppStore = defineStore('app', {
                 })
 
             } catch (error) {
-                
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
         },
         async login(input) {
@@ -63,6 +81,12 @@ export const useAppStore = defineStore('app', {
                 this.router.push('/')
             } catch (error) {
                 console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
         },
         async register(input) {
@@ -76,6 +100,12 @@ export const useAppStore = defineStore('app', {
                 this.router.push('/login')
             } catch (error) {
                 console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
         },
         async fetchLoginUser() {
@@ -90,6 +120,12 @@ export const useAppStore = defineStore('app', {
                 this.loginUser = data
             } catch (error) {
                 console.log();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
         },
         async updatePayment() {
@@ -106,6 +142,12 @@ export const useAppStore = defineStore('app', {
                 })
             } catch (error) {
                 console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
 
         },
@@ -116,17 +158,48 @@ export const useAppStore = defineStore('app', {
                     method: "GET",
                     url: `${server}users/midtrans`,
                     headers: {
-                      access_token: localStorage.getItem("access_token"),
+                        access_token: localStorage.getItem("access_token"),
                     },
-                  });
-                  const cb = this.updatePayment;
-                  window.snap.pay(data.token, {
+                });
+                const cb = this.updatePayment;
+                window.snap.pay(data.token, {
                     onSuccess: function (result) {
-                      cb();
+                        cb();
                     },
-                  });
+                });
             } catch (error) {
                 console.log(error)
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
+            }
+        },
+        async spotify() {
+            try {
+                let { data } = await axios({
+                    method: 'POST',
+                    url: `${server}users/spotify`,
+                    headers: {
+                        access_token: localStorage.getItem("access_token")
+                    },
+                    data: {
+                        title: 'Megah Diterima'
+                    }
+                })
+                this.dataSpotify = data[0]
+                console.log(data[0], ')))))))))');
+                this.router.push('/')
+            } catch (error) {
+                console.log(error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: error.response.data,
+                    footer: '<a href="">Why do I have this issue?</a>'
+                })
             }
         }
     }

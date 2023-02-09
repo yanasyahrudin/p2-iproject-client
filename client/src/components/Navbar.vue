@@ -67,19 +67,19 @@ export default {
                         </RouterLink>
                   
 
-                            <li><a class="hover:text-gray-200" href="#" >{{ user.payment }}</a></li>
+                            <li><a class="hover:text-gray-200" href="#" >{{ user?.payment || ''}}</a></li>
                         
                     </ul>
                     <!-- Header Icons -->
                     <div class="hidden xl:flex items-center space-x-5 items-center">
-                        <a class="hover:text-gray-200" href="#">
+                        <a class="hover:text-gray-200" href="#" @click.prevent="upgradeMembership">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                             </svg>
                         </a>
-                        <a class="flex items-center hover:text-gray-200" @click.prevent="upgradeMembership" href="#">
+                        <!-- <a class="flex items-center hover:text-gray-200" @click.prevent="upgradeMembership" href="#">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                                 stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -91,10 +91,10 @@ export default {
                                 <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500">
                                 </span>
                             </span>
-                        </a>
+                        </a> -->
                         <!-- Sign In / Register      -->
                         <a class="flex items-center hover:text-gray-200" @click.prevent="logout" href="#">
-                           Logout
+                           {{ payment? 'Logout' : 'Login' }}
                         </a>
 
                     </div>

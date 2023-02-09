@@ -24,7 +24,7 @@ export default {
 
 <template>
     <Navbar v-for="user in loginUser" :user="user" :key="user.id" />
-    <div class="grid grid-cols-3">
+    <div class="flex justify-center space-x-5 mt-5" >
 
         <CompactDiscCard v-for="cd in compactDisc" :key="cd.id" :cd="cd" />
     </div>
