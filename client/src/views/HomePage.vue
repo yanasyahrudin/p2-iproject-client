@@ -5,25 +5,26 @@ import { useAppStore } from '../stores';
 
 export default {
     name: "HomePage",
-    components: { Navbar,  },
+    components: { Navbar },
     computed :{
-        ...mapState(useAppStore, ['loginUser'])
+        ...mapState(useAppStore, ['loginUser', 'dataSpotify'])
     },
     methods: {
-      ...mapActions(useAppStore, ['fetchLoginUser']),
+      ...mapActions(useAppStore, ['fetchLoginUser', 'spotify']),
 
     },
     created() {
       this.fetchLoginUser()
+      this.spotify()
     }
 
 }
 </script>
 
 <template>
+  <Navbar/>
     <div class="container">
         <div class="row">
-            <Navbar v-for="user in loginUser" :user="user" :key="user.id" />
            
             <section
       class="relative bg-[url(https://morfemband.files.wordpress.com/2015/04/img_2727-2.jpg?w=768&h=512)] bg-cover bg-center bg-no-repeat"
@@ -59,15 +60,19 @@ export default {
            
 
             <a
-              href="https://jkt48.com/news/list?lang=id"
+              href="https://morfemband.wordpress.com/"
               target="_blank"
               class="block w-full rounded bg-white px-12 py-3 text-sm font-medium text-slate-800 shadow hover:text-slate-500 focus:outline-none focus:ring active:text-slate-600 sm:w-auto"
             >
               Learn More
             </a>
+          </div><br><br>
+          <div>
+            <a :href="dataSpotify.data.uri" type="" class="rounded-full py-2 px-6 bg-green-500" placeholder="new song" >Listen {{ dataSpotify.data.name }} on spotify</a>
           </div>
         </div>
       </div>
+      
     </section>
         </div>
     </div>

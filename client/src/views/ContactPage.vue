@@ -22,10 +22,13 @@ export default {
 <template>
     <div>
         <Navbar v-for="user in loginUser" :user="user" :key="user.id" />
-        <div class="container flex">
-            <img src="https://morfemband.files.wordpress.com/2015/03/morfem-2015-1-hires.jpg?w=768&h=488" alt="">
+        <div class="flex justify-between text-center ">
+            
 
-            <div >
+                <img src="https://morfemband.files.wordpress.com/2015/03/morfem-2015-1-hires.jpg?w=768&h=488"  alt="">
+           
+
+            <div class="w-full mt-10">
                 Get in touch <br>
                 Band enquiries and bookings: <br>
                 Chiara <br>
